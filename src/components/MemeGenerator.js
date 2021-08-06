@@ -10,6 +10,7 @@ class MemeGenerator extends React.Component {
             allMemeImgs: []
         }
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     componentDidMount(){
@@ -31,10 +32,17 @@ class MemeGenerator extends React.Component {
         })
     }
     
+    handleSubmit(event) {
+        event.preventDefault()
+        const randNum = Math.floor(Math.random() * this.state.allMemeImgs.length)
+        const randMemeImg = this.state.allMemeImgs[randNum].url
+        this.setState({ randomImg: randMemeImg })
+    }
+
     render(){
         return(
             <>
-            <form className="meme-form">
+            <form className="meme-form" onSubmit={this.handleSubmit}>
                 <input placeholder="Top Text" name="topText" onChange={this.handleChange}/>
                 <input placeholder="Bottom Text" name="bottomText" onChange={this.handleChange}/>
 
